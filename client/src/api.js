@@ -8,7 +8,27 @@ export const fetchEvents = async () => {
 };
 
 export const filterEvents = async (filters) => {
-  const query = new URLSearchParams(filters).toString();
-  const response = await axios.get(`${API_BASE_URL}/filter?${query}`);
-  return response.data;
+  const { country, eventType, sentiment, search } = filters;
+
+  // Fetch all events (or use cached data)
+  const allEvents = await fetchEvents();
+
+  // Apply partial matching
+  return allEvents.filter((event) => {
+    const matchesCountry = country
+      ? event.country.toLowerCase().includes(country.toLowerCase())
+      : true;
+    const matchesEventType = eventType
+      ? event.event.toLowerCase().includes(eventType.toLowerCase())
+      : true;
+    const matchesSentiment = sentiment
+      ? event.sentiment.toLowerCase() === sentiment.toLowerCase()
+      : true;
+    const matchesSearch = search
+      ? event.event.toLowerCase().includes(search.toLowerCase()) ||
+        event.country.toLowerCase().includes(search.toLowerCase())
+      : true;
+
+    return matchesCountry && matchesEventType && matchesSentiment && matchesSearch;
+  });
 };

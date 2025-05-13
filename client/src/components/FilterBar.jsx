@@ -11,7 +11,8 @@ const FilterBar = ({ onFilter }) => {
   const handleChange = (e) => {
     const updatedFilters = { ...filters, [e.target.name]: e.target.value };
     setFilters(updatedFilters);
-    onFilter(updatedFilters); // Trigger the filter function on every change
+
+    onFilter(updatedFilters);
   };
 
   return (
