@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000/api/events';
+const API_BASE_URL = 'https://trading-economic-calender-api.onrender.com/api/events';
 
 export const fetchEvents = async () => {
   const response = await axios.get(API_BASE_URL);

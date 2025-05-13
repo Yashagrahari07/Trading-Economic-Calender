@@ -15,6 +15,9 @@ mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB connected'))
 .catch((err) => console.error(err));
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the Trading Economic Calender');
+});
 app.use('/api/events', eventsRoutes);
 
 module.exports = app;
