@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const eventsRoutes = require('./routes/event');
 
 dotenv.config();
 
@@ -13,5 +14,7 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB connected'))
 .catch((err) => console.error(err));
+
+app.use('/api/events', eventsRoutes);
 
 module.exports = app;
