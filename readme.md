@@ -74,6 +74,18 @@ This project fetches and displays high-impact economic event data for the curren
 
 ---
 
+## AI Analysis Logic
+The project includes basic AI logic to determine the sentiment of economic events based on predefined rules:
+
+- **`CPI (Consumer Price Index)`**: If Actual > Forecast, signal Bearish 🔴 (inflation rising → rate hikes expected).
+- **`NFP (Non-Farm Payrolls)`**: If Actual > Forecast, signal Bullish 🟢 (strong employment data → stronger economy).
+- **`FOMC (Federal Open Market Committee)`**: Analyze rate hikes vs. cuts:
+  - **Rate hike** = Bearish 🔴
+  - **Rate cut** = Bullish 🟢
+- **`Unknown Events`**: Default to Neutral.
+
+---
+
 ## API Documentation
 
 ### Endpoints
