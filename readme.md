@@ -1,6 +1,6 @@
 # Trading Economic Calendar
 
-This project fetches and displays high-impact economic event data for the current week using the TradingEconomics API. It provides backend functionality to filter, search, and analyze events based on market impact, and a React-based frontend to display and interact with the data.
+This project fetches and displays high-impact economic event data using the TradingEconomics API. It provides backend functionality to filter, search, and analyze events based on market impact, along with a React-based frontend featuring a calendar UI to display and interact with the data for specific date ranges.
 
 ---
 
@@ -68,6 +68,7 @@ This project fetches and displays high-impact economic event data for the curren
 ### Client
 - **`src/App.jsx`**: Main React component that renders the application.
 - **`src/components/FilterBar.jsx`**: Component for filtering events.
+- **`src/components/DateRangePicker.jsx`**: Component for selecting date ranges.
 - **`src/components/EventTable.jsx`**: Component for displaying events in a table.
 - **`src/api.js`**: Handles API requests to the backend.
 - **`src/styles.css`**: Global styles for the application.
@@ -82,6 +83,10 @@ The project includes basic AI logic to determine the sentiment of economic event
 - **`FOMC (Federal Open Market Committee)`**: Analyze rate hikes vs. cuts:
   - **Rate hike** = Bearish 🔴
   - **Rate cut** = Bullish 🟢
+- **`PMI (Purchasing Managers' Index)`**: 
+  - Above 50 = Bullish 🟢 (expansion)
+  - Below 50 = Bearish 🔴 (contraction)
+- **`GDP`**: If Actual > Forecast, signal Bullish 🟢 (stronger economic growth).
 - **`Unknown Events`**: Default to Neutral.
 
 ---
@@ -91,7 +96,11 @@ The project includes basic AI logic to determine the sentiment of economic event
 ### Endpoints
 
 #### GET `/api/events`
-Fetches high-impact economic events for the current week.
+Fetches economic events for a specific date range (defaults to current week if no dates provided).
+
+Query Parameters:
+- `startDate`: Start date in YYYY-MM-DD format
+- `endDate`: End date in YYYY-MM-DD format
 
 Response:
 ```json
@@ -100,9 +109,11 @@ Response:
     "date": "2023-XX-XX",
     "event": "string",
     "country": "string",
+    "category": "string",
     "forecast": "string",
     "actual": "string",
     "previous": "string",
+    "importance": 1,
     "sentiment": "string",
     "highImpact": true
   }
@@ -117,7 +128,9 @@ Query Parameters:
 - `eventType`: Filter by event type.
 - `sentiment`: Filter by market sentiment (e.g., `Bullish 🟢`, `Bearish 🔴`, `Neutral`).
 - `search`: Search events by name.
-- `sortBy`: Sort by `date` or `sentiment`.
+- `startDate`: Filter events from this date (YYYY-MM-DD).
+- `endDate`: Filter events until this date (YYYY-MM-DD).
+- `sortBy`: Sort by `date`, `importance`, `country`, or `sentiment`.
 
 ---
 
@@ -126,15 +139,19 @@ Query Parameters:
   - Fetches economic events from the TradingEconomics API.
   - Analyzes market sentiment for events.
   - Stores events in MongoDB.
-  - Provides filtering and sorting functionality via API.
+  - Provides filtering, date range selection, and sorting functionality via API.
 
 - **Frontend**:
+  - Date range selector with preset options (current week, current month).
   - Displays events in a table with filtering and search options.
   - Highlights high-impact events.
+  - Responsive design for desktop and mobile.
 
 ---
 
 ## Next Steps
 - Add user authentication.
 - Enable custom event notifications.
+- Add historical data analysis and trends.
+- Implement data visualization with charts.
 - Enhance UI/UX with additional features.

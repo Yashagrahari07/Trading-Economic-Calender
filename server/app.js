@@ -8,7 +8,12 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+// Configure CORS to allow requests from client
+app.use(cors({
+  origin: ['https://trading-economic-calender.onrender.com'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)

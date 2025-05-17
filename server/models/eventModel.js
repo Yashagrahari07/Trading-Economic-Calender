@@ -8,15 +8,24 @@ const eventSchema = new mongoose.Schema({
   actual: String,
   previous: String,
   sentiment: String,
+  importance: Number,
+  category: String,
   details: String,
   highImpact: { type: Boolean, default: false }, 
 });
 
 eventSchema.pre('save', function (next) {
-  const highImpactKeywords = ['CPI', 'NFP', 'FOMC', 'Interest Rate'];
-  this.highImpact = highImpactKeywords.some(keyword =>
-    this.event.toLowerCase().includes(keyword.toLowerCase())
-  );
+  // High impact events by keywords
+  const highImpactKeywords = ['CPI', 'NFP', 'FOMC', 'Interest Rate', 'GDP', 'Employment'];
+  
+  // Set highImpact based on keywords or importance value from API (if 3 is highest)
+  this.highImpact = 
+    this.importance >= 3 || 
+    highImpactKeywords.some(keyword =>
+      this.event?.toLowerCase().includes(keyword.toLowerCase()) ||
+      this.category?.toLowerCase().includes(keyword.toLowerCase())
+    );
+    
   next();
 });
 

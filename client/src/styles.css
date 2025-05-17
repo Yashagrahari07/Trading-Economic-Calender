@@ -14,24 +14,145 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+header h1 {
   text-align: center;
   color: #333;
+  margin-bottom: 5px;
+}
+
+header p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Date Range Picker */
+.date-range-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.date-range-picker h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #495057;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: #495057;
+}
+
+.input-group input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.date-presets {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+.date-presets button {
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #495057;
+  transition: all 0.2s ease;
+}
+
+.date-presets button:hover {
+  background-color: #dee2e6;
+}
+
+/* Filter Section */
+.filter-section {
+  margin-bottom: 20px;
 }
 
 .filter-bar {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.filter-bar input,
-.filter-bar select,
-.filter-bar button {
+.filter-input {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 150px;
+}
+
+.filter-input small {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.filter-input input,
+.filter-input select {
   padding: 10px;
-  margin: 0 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #ced4da;
   border-radius: 4px;
+  font-size: 14px;
+}
+
+.search-input {
+  flex: 2;
+}
+
+/* Content Area */
+.content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.loading,
+.no-events,
+.error-message {
+  padding: 30px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.error-message {
+  color: #dc3545;
+}
+
+/* Table Styling */
+.table-container {
+  overflow-x: auto;
 }
 
 .event-table {
@@ -39,17 +160,72 @@ h1 {
   border-collapse: collapse;
 }
 
-.event-table th,
-.event-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-.event-table .high-impact {
-  background-color: #ffe6e6;
-}
-
 .event-table th {
-  background-color: #f4f4f4;
+  background-color: #f8f9fa;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+  position: sticky;
+  top: 0;
+}
+
+.event-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.event-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.event-table .no-data {
+  text-align: center;
+  padding: 30px;
+  color: #6c757d;
+}
+
+/* High impact styling */
+.high-impact {
+  background-color: #fff3cd;
+}
+
+.high-impact:hover {
+  background-color: #ffeeba !important;
+}
+
+/* Sentiment styling */
+.bullish {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.bearish {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.neutral {
+  color: #6c757d;
+}
+
+/* Table responsive */
+@media (max-width: 768px) {
+  .event-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* Header and Footer */
+header, footer {
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer {
+  color: #6c757d;
+  font-size: 14px;
+  margin-top: 30px;
 }
